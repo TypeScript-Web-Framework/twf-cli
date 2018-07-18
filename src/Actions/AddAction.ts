@@ -1,7 +1,4 @@
 import {Helpers} from "../Helpers";
-import {Controller} from "../../Proyecto/src/core/Controller";
-import {IndexController} from "../../Proyecto/src/controllers/IndexController";
-
 let path = require("path");
 let fs = require("fs");
 
