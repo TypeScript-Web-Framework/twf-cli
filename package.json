@@ -1,0 +1,30 @@
+{
+    "name": "twf-cli",
+    "version": "1.0.0",
+    "description": "TypeScript Web Framework CLI",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/olaferlandsen/twf-cli.git"
+    },
+    "author": "",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/olaferlandsen/twf-cli/issues"
+    },
+    "homepage": "https://github.com/olaferlandsen/twf-cli#readme",
+    "devDependencies": {
+        "@types/node": "^10.5.2",
+        "gulp": "^4.0.0",
+        "gulp-clean": "^0.4.0",
+        "gulp-typescript": "^5.0.0-alpha.3",
+        "typescript": "^2.9.2"
+    },
+    "dependencies": {
+        "rxjs": "^6.2.0",
+        "uuid": "^3.3.2"
+    }
+}
