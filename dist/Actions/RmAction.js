@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const AddAction_1 = require("./AddAction");
 const Helpers_1 = require("../Helpers");
 let path = require("path");
 let fs = require("fs");
@@ -22,7 +21,7 @@ class RmAction {
         if (segments.length === 0)
             throw new Error("controller is empty");
         let name = Helpers_1.Helpers.camelize(segments[segments.length - 1]);
-        let dirPath = [AddAction_1.AddAction.directory, "src", "controllers"]
+        let dirPath = [RmAction.directory, "src", "controllers"]
             .concat(segments.slice(0, segments.length - 1))
             .join(path.sep);
         let ctrlPath = dirPath + path.sep + name + "Controller.ts";

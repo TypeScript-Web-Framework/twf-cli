@@ -1,6 +1,6 @@
 {
     "name": "twf-cli",
-    "version": "1.4.4",
+    "version": "1.4.5",
     "description": "TypeScript Web Framework CLI",
     "main": "dist/index.js",
     "bin": {

@@ -15,12 +15,10 @@ export class RmAction {
 
         switch (argv[0]) {
             case "controller":this.controller.apply(this, argv.slice(1));break;
-            //case "http":this.controller.apply(this, argv.slice(1));break;
         }
     }
     public controller (controller:string, rootRoute?:string):void {
         controller = Helpers.sanitizeUri(controller.replace('\\', '/'));
-        rootRoute = Helpers.sanitizeUri(rootRoute);
         let segments : string[] = controller.split('/').map(v => Helpers.camelize(v));
         if (segments.length === 0) throw new Error("controller is empty");
         let name : string = Helpers.camelize(segments[ segments.length -1 ]);
@@ -28,11 +26,6 @@ export class RmAction {
             .concat(segments.slice(0, segments.length-1))
             .join(path.sep);
         let ctrlPath: string = dirPath + path.sep + name + "Controller.ts";
-        let route : string = (rootRoute || "" || name)
-            .trim()
-            .replace(/(^\/+|\/+$)/g, '')
-            .replace(/\/+/g,'/');
-
         if (fs.existsSync(ctrlPath)) {
             fs.unlink(ctrlPath, (err:any) => {
                 if (err) {
