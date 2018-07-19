@@ -2,9 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var _a;
 const AddAction_1 = require("./Actions/AddAction");
-const InitAction_1 = require("./Actions/InitAction");
+const StartAction_1 = require("./Actions/StartAction");
 const VerifyAction_1 = require("./Actions/VerifyAction");
 const HelpAction_1 = require("./Actions/HelpAction");
+const ServeAction_1 = require("./Actions/ServeAction");
+const RmAction_1 = require("./Actions/RmAction");
 new (_a = class Binary {
         constructor() {
             Binary.argv = process.argv.slice(2);
@@ -12,11 +14,18 @@ new (_a = class Binary {
         }
         static onAction(action) {
             switch (action) {
+                case "serve":
+                    new ServeAction_1.ServeAction();
+                    break;
                 case "add":
                     new AddAction_1.AddAction(Binary.argv.slice(1));
                     break;
-                case "init":
-                    new InitAction_1.InitAction(Binary.argv.slice(1));
+                case "rm":
+                case "remove":
+                    new RmAction_1.RmAction(Binary.argv.slice(1));
+                    break;
+                case "start":
+                    new StartAction_1.StartAction(Binary.argv.slice(1));
                     break;
                 case "verify":
                     new VerifyAction_1.VerifyAction(Binary.argv.slice(1));

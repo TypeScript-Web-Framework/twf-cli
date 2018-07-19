@@ -17,7 +17,6 @@ class VerifyAction {
             console.log("This project is valid");
             process.exit(0);
         }
-        console.groupEnd();
     }
     isValid() {
         for (let file of VerifyAction.files) {

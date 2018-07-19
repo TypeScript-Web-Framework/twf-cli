@@ -2,13 +2,27 @@
 TypeScript Web Framework CLI
 
 
+## Features
+* [x] Generate controller
+* [ ] Remove controller
+* [x] Verify project structure
+* [ ] Clean project
+    * [ ] Remove `www`
+    * [ ] Remove `node_modules`
+    * [ ] Remove `package-lock.json`
+* [ ] Install dependencies
+* [ ] Serve project
+* [ ] Generate http property on controller
+* [ ] Remove http property on controller
+* [ ] Generate compiled binary package
+
 ## Commands
 
 
 ### Start Project
 ```bash
-# twf init [project]
-twf init my-first-project
+# twf start [project]
+twf start my-first-project
 ```
 
 ### Clean Project
@@ -29,29 +43,8 @@ twf serve 8080
 
 ### Generate Controller
 ```bash
-# twf add controller [name]
+# twf add controller [name] [default route]
 twf add controller index
-```
-
-### Add Action to Controller
-```bash
-# twf add action [property] [method] [controller] [route]
-# twf add action [property] as [method] on [controller] with [route]
-twf add action read get index /home
-```
-
-### Generate CRUD Controller
-```bash
-# twf add crud [controller]
-twf add crud index
-```
-
-### Generate Test
-```bash
-twf test
-```
-
-### Generate Binary Package
-```bash
-twf package
+twf add controller index /profile/:id
+twf add controller main/index /profile/:id
 ```

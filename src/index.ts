@@ -1,11 +1,12 @@
 import {AddAction} from "./Actions/AddAction";
-import {InitAction} from "./Actions/InitAction";
+import {StartAction} from "./Actions/StartAction";
 import {VerifyAction} from "./Actions/VerifyAction";
 import {HelpAction} from "./Actions/HelpAction";
 import {ServeAction} from "./Actions/ServeAction";
+import {RmAction} from "./Actions/RmAction";
 
 
-declare type Actions = "add" | "rm" | "verify" | "serve" | "clean" | "test" | "package" | "init" | "help" | "--help" | "-h";
+declare type Actions = "add" | "rm" | "remove" | "verify" | "serve" | "clean" | "test" | "package" | "compile" | "start" | "help" | "--help" | "-h";
 
 new (class Binary {
     public static argv : string[] = [];
@@ -16,13 +17,21 @@ new (class Binary {
 
     static onAction (action: Actions):void {
         switch (action) {
-            case "serve": new ServeAction();break;
-            case "add": new AddAction(Binary.argv.slice(1));break;
-            case "init": new InitAction(Binary.argv.slice(1));break;
-            case "verify": new VerifyAction(Binary.argv.slice(1));break;
+            case "serve":
+                new ServeAction();break;
+            case "add":
+                new AddAction(Binary.argv.slice(1));break;
+            case "rm":
+            case "remove":
+                new RmAction(Binary.argv.slice(1));break;
+            case "start":
+                new StartAction(Binary.argv.slice(1));break;
+            case "verify":
+                new VerifyAction(Binary.argv.slice(1));break;
             case "help":
             case "--help":
-            case "-h":new HelpAction();break;
+            case "-h":
+                new HelpAction();break;
             default:
                 console.log(`Invalid action: ${action}`);
                 console.log("see help with: twf --help");

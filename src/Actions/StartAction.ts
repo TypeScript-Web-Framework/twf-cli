@@ -8,31 +8,31 @@ let crypto = require('crypto');
 let uuid = require('uuid/v4');
 
 
-export class InitAction {
+export class StartAction {
     public static directory : string;
     public static argv : string [] = [];
 
     public constructor (argv:string[]) {
-        InitAction.argv = argv;
+        StartAction.argv = argv;
         this.onInit.apply(this, argv);
     }
 
 
     public onInit (...args:string[]) {
-        InitAction.directory = process.cwd();
+        StartAction.directory = process.cwd();
 
         if (args.length > 0) {
             if(typeof args[0] === "string") {
-                if (!/^([.\/\\\s]+)$/.test(args[0])) InitAction.directory += path.sep + Helpers.camelize(args[0]);
+                if (!/^([.\/\\\s]+)$/.test(args[0])) StartAction.directory += path.sep + Helpers.camelize(args[0]);
             }
             else throw new TypeError("expected string name");
         }
-        console.log(`Working on ${InitAction.directory}`);
+        console.log(`Working on ${StartAction.directory}`);
 
 
 
-        if (!fs.existsSync(InitAction.directory)) {
-            this.isEmptyDir(InitAction.directory)
+        if (!fs.existsSync(StartAction.directory)) {
+            this.isEmptyDir(StartAction.directory)
                 .then(() => this.getLastRelease()
                         .then((t) =>
                             this.clone(t)
@@ -50,10 +50,10 @@ export class InitAction {
                         .catch(() => {})
                 )
                 .catch((e) => {
-                    throw new Error(`The directory ${InitAction.directory} is not empty`)
+                    throw new Error(`The directory ${StartAction.directory} is not empty`)
                 })
         }
-        else throw new Error(`Directory ${InitAction.directory} already exists`);
+        else throw new Error(`Directory ${StartAction.directory} already exists`);
     }
 
     public getLastRelease ():Promise<string> {
@@ -95,7 +95,7 @@ export class InitAction {
                 "--single-branch",
                 "--depth",
                 "1",
-                InitAction.directory
+                StartAction.directory
             ]);
             if (!spawn.error) resolve();
             else reject(spawn.error);
@@ -105,8 +105,8 @@ export class InitAction {
     public editConfig ():Promise<void> {
         return new Promise<void>((resolve, reject) => {
             let paths : any = {
-                manifiest : InitAction.directory + path.sep + "src" + path.sep + "manifiest.json",
-                package : InitAction.directory + path.sep + "package.json"
+                manifiest : StartAction.directory + path.sep + "src" + path.sep + "manifiest.json",
+                package : StartAction.directory + path.sep + "package.json"
             };
             let content : any;
 
@@ -146,7 +146,7 @@ export class InitAction {
             /*
 
             console.group("Installing dependencies");
-            process.chdir( InitAction.directory );
+            process.chdir( StartAction.directory );
             console.log("Working on", process.cwd());
 
 
