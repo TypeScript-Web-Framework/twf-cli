@@ -53,9 +53,12 @@ export class AddAction {
 
 
         let content : string[] = [];
-        content.push('import {Http} from "../annotations/Http";');
-        content.push('import {Controller} from "../core/Controller";');
-        content.push('import {Api} from "../annotations/Api";');
+
+        let dot :string = "../".repeat(segments.length);
+
+        content.push('import {Http} from "' +dot+ 'annotations/Http";');
+        content.push('import {Controller} from "' + dot + 'core/Controller";');
+        content.push('import {Api} from "' + dot + 'annotations/Api";');
         content.push('@Api');
         content.push(`export class ${ name }Controller extends Controller {`);
         content.push(`    @Http("/${ route }")`);
