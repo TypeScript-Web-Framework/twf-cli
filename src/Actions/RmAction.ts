@@ -44,7 +44,7 @@ export class RmAction {
             })
         }
         else {
-            console.log(c.bold.gray(c.bold.yellow(c.symbols.warning), `The controller ${name} does not exists`));
+            console.log(c.bold.gray(c.bold.yellow(c.symbols.warning), `The controller ${name} does not exists: ${ctrlPath}`));
             process.exit(0)
         }
     }
