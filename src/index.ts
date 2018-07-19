@@ -4,9 +4,10 @@ import {VerifyAction} from "./Actions/VerifyAction";
 import {HelpAction} from "./Actions/HelpAction";
 import {ServeAction} from "./Actions/ServeAction";
 import {RmAction} from "./Actions/RmAction";
+import {InstallAction} from "./Actions/InstallAction";
 
 
-declare type Actions = "add" | "rm" | "remove" | "verify" | "serve" | "clean" | "test" | "package" | "compile" | "start" | "help" | "--help" | "-h";
+declare type Actions = "install" | "add" | "rm" | "remove" | "verify" | "serve" | "clean" | "test" | "package" | "compile" | "start" | "help" | "--help" | "-h";
 
 new (class Binary {
     public static argv : string[] = [];
@@ -19,6 +20,9 @@ new (class Binary {
         switch (action) {
             case "serve":
                 new ServeAction();break;
+
+            case "install":
+                new InstallAction();break;
             case "add":
                 new AddAction(Binary.argv.slice(1));break;
             case "rm":

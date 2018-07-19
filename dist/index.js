@@ -7,6 +7,7 @@ const VerifyAction_1 = require("./Actions/VerifyAction");
 const HelpAction_1 = require("./Actions/HelpAction");
 const ServeAction_1 = require("./Actions/ServeAction");
 const RmAction_1 = require("./Actions/RmAction");
+const InstallAction_1 = require("./Actions/InstallAction");
 new (_a = class Binary {
         constructor() {
             Binary.argv = process.argv.slice(2);
@@ -16,6 +17,9 @@ new (_a = class Binary {
             switch (action) {
                 case "serve":
                     new ServeAction_1.ServeAction();
+                    break;
+                case "install":
+                    new InstallAction_1.InstallAction();
                     break;
                 case "add":
                     new AddAction_1.AddAction(Binary.argv.slice(1));

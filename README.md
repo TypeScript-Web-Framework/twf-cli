@@ -12,7 +12,7 @@ TypeScript Web Framework CLI
     * [x] Remove `temp`
     * [x] Remove `node_modules`
     * [x] Remove `package-lock.json`
-* [ ] Install dependencies
+* [x] Install dependencies
 * [x] Serve project
 * [ ] Generate http property on controller
 * [ ] Remove http property on controller
@@ -30,6 +30,11 @@ twf start my-first-project
 ### Clean Project
 ```bash
 twf clean
+```
+
+### Install Dependencies
+```bash
+twf install
 ```
 
 ### Verify Project 

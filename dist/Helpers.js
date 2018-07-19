@@ -12,5 +12,24 @@ class Helpers {
             .replace(/(^\/+|\/+$)/g, '')
             .replace(/\/+/g, '/');
     }
+    static loading(speed = 250) {
+        let interval = null;
+        let P = ["\\", "|", "/", "-"];
+        let x = 0;
+        return {
+            start: () => {
+                interval = setInterval(() => {
+                    process.stdout.write("\r" + P[x++]);
+                    x &= 3;
+                }, speed);
+                return {
+                    end: () => {
+                        clearInterval(interval);
+                        process.stdout.write("\r" + "");
+                    }
+                };
+            }
+        };
+    }
 }
 exports.Helpers = Helpers;
