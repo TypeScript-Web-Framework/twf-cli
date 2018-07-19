@@ -7,7 +7,8 @@ let fs = require("fs");
 let c = require("ansi-colors");
 class RmAction {
     constructor(argv) {
-        AddAction_1.AddAction.argv = argv;
+        RmAction.argv = argv;
+        RmAction.directory = process.cwd();
         switch (argv[0]) {
             case "controller":
                 this.controller.apply(this, argv.slice(1));
@@ -42,7 +43,7 @@ class RmAction {
             });
         }
         else {
-            console.log(c.bold.gray(c.bold.yellow(c.symbols.warning), `The controller ${name} does not exists`));
+            console.log(c.bold.gray(c.bold.yellow(c.symbols.warning), `The controller ${name} does not exists: ${ctrlPath}`));
             process.exit(0);
         }
     }
