@@ -4,14 +4,16 @@ TypeScript Web Framework CLI
 
 ## Features
 * [x] Generate controller
-* [ ] Remove controller
+* [x] Remove controller
 * [x] Verify project structure
-* [ ] Clean project
-    * [ ] Remove `www`
-    * [ ] Remove `node_modules`
-    * [ ] Remove `package-lock.json`
+* [x] Clean project
+    * [x] Remove `www`
+    * [x] Remove `dist`
+    * [x] Remove `temp`
+    * [x] Remove `node_modules`
+    * [x] Remove `package-lock.json`
 * [ ] Install dependencies
-* [ ] Serve project
+* [x] Serve project
 * [ ] Generate http property on controller
 * [ ] Remove http property on controller
 * [ ] Generate compiled binary package
@@ -37,8 +39,7 @@ twf verify
 
 ### Serve
 ```bash
-# twf serve [port]
-twf serve 8080
+twf serve
 ```
 
 ### Generate Controller
