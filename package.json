@@ -6,10 +6,6 @@
     "bin": {
         "twf" : "bin/twf.js"
     },
-    "files": [
-        "dist",
-        "src"
-    ],
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
