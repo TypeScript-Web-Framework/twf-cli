@@ -2,6 +2,7 @@ import {AddAction} from "./Actions/AddAction";
 import {InitAction} from "./Actions/InitAction";
 import {VerifyAction} from "./Actions/VerifyAction";
 import {HelpAction} from "./Actions/HelpAction";
+import {ServeAction} from "./Actions/ServeAction";
 
 
 declare type Actions = "add" | "rm" | "verify" | "serve" | "clean" | "test" | "package" | "init" | "help" | "--help" | "-h";
@@ -15,6 +16,7 @@ new (class Binary {
 
     static onAction (action: Actions):void {
         switch (action) {
+            case "serve": new ServeAction();break;
             case "add": new AddAction(Binary.argv.slice(1));break;
             case "init": new InitAction(Binary.argv.slice(1));break;
             case "verify": new VerifyAction(Binary.argv.slice(1));break;
