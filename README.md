@@ -3,9 +3,29 @@ TypeScript Web Framework CLI
 
 
 ## Features
-* [x] Generate controller
-* [x] Remove controller
+* [x] Generate API Controller
+    * [x] Default CRUD
+        * [x] @HttpPost `create()`
+        * [x] @HttpGet `read()`
+        * [x] @HttpPut `update()`
+        * [x] @HttpDelete `delete()`
+* [x] Remove API Controller
 * [x] Verify project structure
+    * [x] Verify existing `www`
+    * [x] Verify existing `package.json`
+    * [x] Verify existing `src`
+    * [x] Verify existing `src/manifiest.json`
+    * [x] Verify existing `src/controllers`
+    * [x] Verify existing `src/annotations`
+    * [x] Verify existing `src/core`
+    * [x] Verify existing `src/app.ts`
+    * [x] Verify existing `src/server.ts`
+    * [x] Verify existing `src/typings.d.ts`
+* [x] Version info & comparison
+    * [x] CLI Version
+    * [x] Project Version
+    * [x] Node Version
+    * [x] NPM Version
 * [x] Clean project
     * [x] Remove `www`
     * [x] Remove `dist`
@@ -16,7 +36,14 @@ TypeScript Web Framework CLI
 * [x] Serve project
 * [ ] Generate http property on controller
 * [ ] Remove http property on controller
-* [ ] Generate compiled binary package
+* [x] Test Project(Unit Testing)
+* [ ] Build Project
+    * [ ] Production Mode
+    * [x] Development Mode
+* [x] Generate compiled binary package
+    * [x] Windows
+    * [x] Linux
+    * [x] OSX
 
 ## Commands
 

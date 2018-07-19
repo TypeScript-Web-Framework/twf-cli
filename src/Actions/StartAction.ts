@@ -33,7 +33,7 @@ export class StartAction {
 
         if (!fs.existsSync(StartAction.directory)) {
             this.isEmptyDir(StartAction.directory)
-                .then(() => this.getLastRelease()
+                .then(() => StartAction.getLastRelease()
                         .then((t) =>
                             this.clone(t)
                                 .then(() =>
@@ -56,7 +56,7 @@ export class StartAction {
         else throw new Error(`Directory ${StartAction.directory} already exists`);
     }
 
-    public getLastRelease ():Promise<string> {
+    public static getLastRelease ():Promise<string> {
         return new Promise<string>((resolve, reject) => {
             https.get({
                 protocol : "https:",

@@ -13,12 +13,6 @@ class AddAction {
             case "controller":
                 this.controller.apply(this, argv.slice(1));
                 break;
-            case "http":
-                this.http.apply(this, argv.slice(1));
-                break;
-            case "crud":
-                this.http.apply(this, argv.slice(1));
-                break;
         }
     }
     controller(controller, rootRoute) {
@@ -38,13 +32,25 @@ class AddAction {
             .replace(/\/+/g, '/');
         let content = [];
         let dot = "../".repeat(segments.length);
-        content.push('import {Http} from "' + dot + 'annotations/Http";');
+        content.push('import {HttpPost, HttpGet, HttpPut, HttpDelete} from "' + dot + 'annotations/Http";');
         content.push('import {Controller} from "' + dot + 'core/Controller";');
         content.push('import {Api} from "' + dot + 'annotations/Api";');
         content.push('@Api');
         content.push(`export class ${name}Controller extends Controller {`);
-        content.push(`    @Http("/${route}")`);
-        content.push('    public index () {');
+        content.push(`    @HttpPost("/${route}")`);
+        content.push('    public create () {');
+        content.push('        this.httpCreated();');
+        content.push('    }');
+        content.push(`    @HttpGet("/${route}")`);
+        content.push('    public read () {');
+        content.push('        this.httpOk();');
+        content.push('    }');
+        content.push(`    @HttpPut("/${route}")`);
+        content.push('    public update () {');
+        content.push('        this.httpOk();');
+        content.push('    }');
+        content.push(`    @HttpDelete("/${route}")`);
+        content.push('    public delete () {');
         content.push('        this.httpOk();');
         content.push('    }');
         content.push('}');
@@ -78,52 +84,6 @@ class AddAction {
             else
                 resolve();
         });
-    }
-    http(...args) {
-        let name = Helpers_1.Helpers.camelize(args[0]) + "Controller";
-        let controller = fs.readFileSync([
-            AddAction.directory,
-            "src",
-            "controller",
-            name + ".ts"
-        ].join(path.sep));
-        let actionContent = "";
-        actionContent += "\n";
-        actionContent += `    @Http("/")`;
-        actionContent += '    public index () {';
-        actionContent += '        this.httpOk();';
-        actionContent += '    }';
-        actionContent += "\n";
-        let regex = /(\s+@Api\s+export\s+class\s+(([a-z0-9_]+)Controller)\s+extends\s+Controller(\s+)?\{)/i;
-        let match = controller.match(regex);
-        controller.replace(match[1], "$1");
-    }
-    crud(...args) {
-        console.log(`Adding new controller ${args[0]}`);
-        let content = "";
-        content += 'import {HttpPost, HttpGet, HttpPut, HttpDelete} from "../annotations/Http";';
-        content += 'import {Controller} from "../core/Controller";';
-        content += 'import {Api} from "../annotations/Api";';
-        content += '@Api';
-        content += `export class ${Helpers_1.Helpers.camelize(args[0])} extends Controller {`;
-        content += `    @HttpPost("/${Helpers_1.Helpers.camelize(args[0])}")`;
-        content += '    public create () {';
-        content += '        this.httpCreated();';
-        content += '    }';
-        content += `    @HttpGet("/${Helpers_1.Helpers.camelize(args[0])}")`;
-        content += '    public read () {';
-        content += '        this.httpOk();';
-        content += '    }';
-        content += `    @HttpPut("/${Helpers_1.Helpers.camelize(args[0])}")`;
-        content += '    public update () {';
-        content += '        this.httpOk();';
-        content += '    }';
-        content += `    @HttpDelete("/${Helpers_1.Helpers.camelize(args[0])}")`;
-        content += '    public delete () {';
-        content += '        this.httpOk();';
-        content += '    }';
-        content += '}';
-        console.log(`End.`);
     }
 }
 AddAction.argv = [];

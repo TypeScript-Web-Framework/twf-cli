@@ -5,9 +5,13 @@ import {HelpAction} from "./Actions/HelpAction";
 import {ServeAction} from "./Actions/ServeAction";
 import {RmAction} from "./Actions/RmAction";
 import {InstallAction} from "./Actions/InstallAction";
+import {InfoAction} from "./Actions/InfoAction";
+import {PackageAction} from "./Actions/PackageAction";
+import {BuildAction} from "./Actions/BuildAction";
+import {TestAction} from "./Actions/TestAction";
 
 
-declare type Actions = "install" | "add" | "rm" | "remove" | "verify" | "serve" | "clean" | "test" | "package" | "compile" | "start" | "help" | "--help" | "-h";
+declare type Actions = "build" | "install" | "add" | "rm" | "remove" | "verify" | "serve" | "clean" | "test" | "package" | "pkg" | "compile" | "start" | "help" | "--help" | "-h" | "-v" | "--version" | "info";
 
 new (class Binary {
     public static argv : string[] = [];
@@ -18,8 +22,25 @@ new (class Binary {
 
     static onAction (action: Actions):void {
         switch (action) {
+            case "info":
+            case "-v":
+            case "--version":
+                new InfoAction();break;
+
+
             case "serve":
                 new ServeAction();break;
+
+            case "build":
+                new BuildAction();break;
+
+            case "test":
+                new TestAction();break;
+
+            case "package":
+            case "pkg":
+                new PackageAction();break;
+
 
             case "install":
                 new InstallAction();break;

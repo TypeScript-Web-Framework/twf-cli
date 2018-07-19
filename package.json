@@ -1,11 +1,36 @@
 {
     "name": "twf-cli",
-    "version": "1.4.10",
+    "version": "1.6.0",
     "description": "TypeScript Web Framework CLI",
     "main": "dist/index.js",
     "bin": {
         "twf": "bin/twf.js"
     },
+    "files": [
+        "bin",
+        "bin/twf.js",
+        "dist",
+        "dist/Actions",
+        "dist/Actions/AddAction.js",
+        "dist/Actions/BuildAction.js",
+        "dist/Actions/CleanAction.js",
+        "dist/Actions/HelpAction.js",
+        "dist/Actions/InfoAction.js",
+        "dist/Actions/InstallAction.js",
+        "dist/Actions/PackageAction.js",
+        "dist/Actions/RestartAction.js",
+        "dist/Actions/RmAction.js",
+        "dist/Actions/ServeAction.js",
+        "dist/Actions/StartAction.js",
+        "dist/Actions/TestAction.js",
+        "dist/Actions/VerifyAction.js",
+        "dist/Helpers.js",
+        "dist/index.js",
+        "docs",
+        "docs/CLI.md",
+        "README.md"
+    ],
+    "preferGlobal": true,
     "scripts": {},
     "repository": {
         "type": "git",
@@ -27,8 +52,26 @@
     },
     "dependencies": {
         "ansi-colors": "^2.0.4",
+        "compare-versions": "^3.3.0",
         "mkdirp": "^0.5.1",
         "rxjs": "^6.2.0",
         "uuid": "^3.3.2"
-    }
+    },
+    "keywords": [
+        "web",
+        "api",
+        "webapp",
+        "http",
+        "https",
+        "server",
+        "rest",
+        "reastapi",
+        "endpoint",
+        "cli",
+        "express",
+        "hmvc",
+        "mvc",
+        "ts",
+        "typescript"
+    ]
 }

@@ -25,7 +25,7 @@ class StartAction {
         console.log(`Working on ${StartAction.directory}`);
         if (!fs.existsSync(StartAction.directory)) {
             this.isEmptyDir(StartAction.directory)
-                .then(() => this.getLastRelease()
+                .then(() => StartAction.getLastRelease()
                 .then((t) => this.clone(t)
                 .then(() => this.editConfig()
                 .then(() => this.installDependencies()
@@ -43,7 +43,7 @@ class StartAction {
         else
             throw new Error(`Directory ${StartAction.directory} already exists`);
     }
-    getLastRelease() {
+    static getLastRelease() {
         return new Promise((resolve, reject) => {
             https.get({
                 protocol: "https:",
