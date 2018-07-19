@@ -14,8 +14,6 @@ new (class Binary {
     }
 
     static onAction (action: Actions):void {
-        console.log("onAction:", action);
-
         switch (action) {
             case "add": new AddAction(Binary.argv.slice(1));break;
             case "init": new InitAction(Binary.argv.slice(1));break;

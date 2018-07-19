@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 let fs = require("fs");
 let path = require("path");
 let crypto = require('crypto');
+let c = require("ansi-colors");
 class CheckAction {
     constructor(args) {
         CheckAction.directory = process.cwd();
@@ -22,19 +23,22 @@ class CheckAction {
     isValid() {
         for (let file of CheckAction.files) {
             let filePath = CheckAction.directory + path.sep + file.name;
-            console.log(`Verify if file exists: ${filePath}`);
-            if (this.exists(filePath))
-                return false;
-            if (file.type === "dir" && !this.isDir(filePath))
-                return false;
-            if (file.type === "file" && !this.isFile(filePath))
-                return false;
-            if (file.type === "symbolic" && !this.isSymbolicLink(filePath))
-                return false;
-            console.log(`Verify if file checksum: ${file.cheksum}`);
-            if (typeof file.cheksum === "string") {
-                if (this.checksum(filePath) !== file.cheksum) {
+            console.log(c.bold.blue("Checking ", c.italic.black(file.type), c.gray(":"), c.underline.cyan(filePath)));
+            if (!this.exists(filePath)) {
+                console.log(c.bold.red("File don't exists"));
+                process.exit(1);
+            }
+            else {
+                if (file.type === "dir" && !this.isDir(filePath))
                     return false;
+                if (file.type === "file" && !this.isFile(filePath))
+                    return false;
+                if (file.type === "symbolic" && !this.isSymbolicLink(filePath))
+                    return false;
+                if (typeof file.cheksum === "string") {
+                    if (this.checksum(filePath) !== file.cheksum) {
+                        return false;
+                    }
                 }
             }
         }
