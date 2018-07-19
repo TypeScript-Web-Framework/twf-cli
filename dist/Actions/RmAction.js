@@ -16,7 +16,6 @@ class RmAction {
     }
     controller(controller, rootRoute) {
         controller = Helpers_1.Helpers.sanitizeUri(controller.replace('\\', '/'));
-        rootRoute = Helpers_1.Helpers.sanitizeUri(rootRoute);
         let segments = controller.split('/').map(v => Helpers_1.Helpers.camelize(v));
         if (segments.length === 0)
             throw new Error("controller is empty");
@@ -25,10 +24,6 @@ class RmAction {
             .concat(segments.slice(0, segments.length - 1))
             .join(path.sep);
         let ctrlPath = dirPath + path.sep + name + "Controller.ts";
-        let route = (rootRoute || "" || name)
-            .trim()
-            .replace(/(^\/+|\/+$)/g, '')
-            .replace(/\/+/g, '/');
         if (fs.existsSync(ctrlPath)) {
             fs.unlink(ctrlPath, (err) => {
                 if (err) {
