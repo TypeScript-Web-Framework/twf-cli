@@ -8,41 +8,40 @@ class VerifyAction {
     constructor(args) {
         VerifyAction.directory = process.cwd();
         VerifyAction.args = args;
-        if (!this.isValid()) {
-            console.log("This project is not valid");
-            console.log("Exit with code 1");
-            process.exit(1);
-        }
-        else {
-            console.log("This project is valid");
-            process.exit(0);
-        }
+        let message;
+        if (!this.isValid())
+            message = "This project is not valid:";
+        else
+            message = "This project is valid:";
+        console.log(c.bold.gray(c.symbols.cross, message, c.bold.green(VerifyAction.files.length), "files checked", c.bold.red(VerifyAction.stats.negative), "problems"));
+        process.exit(VerifyAction.stats.negative === 0 ? 0 : 1);
     }
     isValid() {
         for (let file of VerifyAction.files) {
             let filePath = VerifyAction.directory + path.sep + file.name;
-            console.log(c.bold.blue("Checking ", c.italic.black(file.type), c.gray(":"), c.underline.cyan(filePath)));
             if (!this.exists(filePath)) {
-                console.log("    ", c.bold.red(c.symbols.cross, "File don't exists"));
-                console.log("    ", c.bold.red("Invalid project!"));
-                process.exit(1);
+                VerifyAction.stats.negative++;
+                VerifyAction.stats.dontExists++;
             }
             else {
-                console.log("    ", c.bold.green(c.symbols.check, "File exists"));
-                if (file.type === "dir" && !this.isDir(filePath))
-                    return false;
-                if (file.type === "file" && !this.isFile(filePath))
-                    return false;
-                if (file.type === "symbolic" && !this.isSymbolicLink(filePath))
-                    return false;
+                VerifyAction.stats.exists++;
+                if (file.type === "dir" && !this.isDir(filePath)) {
+                    VerifyAction.stats.negative++;
+                }
+                if (file.type === "file" && !this.isFile(filePath)) {
+                    VerifyAction.stats.negative++;
+                }
+                if (file.type === "symbolic" && !this.isSymbolicLink(filePath)) {
+                    VerifyAction.stats.negative++;
+                }
                 if (typeof file.cheksum === "string") {
                     if (this.checksum(filePath) !== file.cheksum) {
-                        return false;
+                        VerifyAction.stats.negative++;
                     }
                 }
             }
         }
-        return true;
+        return VerifyAction.stats.negative === 0;
     }
     checksum(filePath) {
         return crypto
@@ -64,6 +63,12 @@ class VerifyAction {
     }
 }
 VerifyAction.args = [];
+VerifyAction.stats = {
+    positive: 0,
+    negative: 0,
+    exists: 0,
+    dontExists: 0
+};
 VerifyAction.files = [
     { name: "package.json", type: "file" },
     { name: "gulpfile.js", type: "file" },
