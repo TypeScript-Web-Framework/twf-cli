@@ -4,8 +4,7 @@
     "description": "TypeScript Web Framework CLI",
     "main": "dist/index.js",
     "bin": {
-        "twf": "bin/twf.js",
-        "prepublish" : "gulp"
+        "twf": "bin/twf.js"
     },
     "scripts": {},
     "repository": {
