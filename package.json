@@ -2,7 +2,14 @@
     "name": "twf-cli",
     "version": "1.0.0",
     "description": "TypeScript Web Framework CLI",
-    "main": "index.js",
+    "main": "dist/index.js",
+    "bin": {
+        "twf" : "bin/twf.js"
+    },
+    "files": [
+        "dist",
+        "src"
+    ],
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -10,7 +17,7 @@
         "type": "git",
         "url": "git+https://github.com/olaferlandsen/twf-cli.git"
     },
-    "author": "",
+    "author": "Olaf Erlandsen",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/olaferlandsen/twf-cli/issues"

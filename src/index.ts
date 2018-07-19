@@ -1,5 +1,6 @@
 import {AddAction} from "./Actions/AddAction";
 import {InitAction} from "./Actions/InitAction";
+import {CheckAction} from "./Actions/CheckAction";
 
 
 declare type Actions = "add" | "rm" | "check" | "serve" | "clean" | "test" | "package" | "init";
@@ -18,7 +19,7 @@ new (class Binary {
         switch (action) {
             case "add": new AddAction(Binary.argv.slice(1));break;
             case "init": new InitAction(Binary.argv.slice(1));break;
-            case "check": new InitAction(Binary.argv.slice(1));break;
+            case "check": new CheckAction(Binary.argv.slice(1));break;
             default:
                 console.log(`Invalid action: ${action}`);
                 process.exit(1);

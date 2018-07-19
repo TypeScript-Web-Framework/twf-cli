@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var _a;
 const AddAction_1 = require("./Actions/AddAction");
 const InitAction_1 = require("./Actions/InitAction");
+const CheckAction_1 = require("./Actions/CheckAction");
 new (_a = class Binary {
         constructor() {
             console.log("init");
@@ -17,6 +18,9 @@ new (_a = class Binary {
                     break;
                 case "init":
                     new InitAction_1.InitAction(Binary.argv.slice(1));
+                    break;
+                case "check":
+                    new CheckAction_1.CheckAction(Binary.argv.slice(1));
                     break;
                 default:
                     console.log(`Invalid action: ${action}`);

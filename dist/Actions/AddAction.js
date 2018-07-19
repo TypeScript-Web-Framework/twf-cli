@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Helpers_1 = require("../Helpers");
+let path = require("path");
+let fs = require("fs");
 class AddAction {
     constructor(argv) {
         console.log("argv", argv);
@@ -27,6 +29,23 @@ class AddAction {
         console.log(`End.`);
     }
     action(...args) {
+        let name = Helpers_1.Helpers.camelize(args[0]) + "Controller";
+        let controller = fs.readFileSync([
+            AddAction.directory,
+            "src",
+            "controller",
+            name + ".ts"
+        ].join(path.sep));
+        let actionContent = "";
+        actionContent += "\n";
+        actionContent += `    @Http("/")`;
+        actionContent += '    public index () {';
+        actionContent += '        this.httpOk();';
+        actionContent += '    }';
+        actionContent += "\n";
+        let regex = /(\s+@Api\s+export\s+class\s+(([a-z0-9_]+)Controller)\s+extends\s+Controller(\s+)?\{)/i;
+        let match = controller.match(regex);
+        controller.replace(match[1], "$1");
     }
     crud(...args) {
         console.log(`Adding new controller ${args[0]}`);
