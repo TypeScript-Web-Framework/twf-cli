@@ -43,3 +43,7 @@ This command create a single binary file for Windows, Linux or OSX.
 By default, the port is `80`.
 
 `twf serve [port]`
+
+## Version
+
+`twf version`

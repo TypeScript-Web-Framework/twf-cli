@@ -16,9 +16,9 @@ twf init my-first-project
 twf clean
 ```
 
-### Check Project Structure
+### Verify Project 
 ```bash
-twf check
+twf verify
 ```
 
 ### Serve
