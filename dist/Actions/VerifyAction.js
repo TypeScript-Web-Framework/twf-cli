@@ -13,7 +13,7 @@ class VerifyAction {
             message = "This project is not valid:";
         else
             message = "This project is valid:";
-        console.log(c.bold.gray(c.symbols.cross, message, c.bold.green(VerifyAction.files.length), "files checked", c.bold.red(VerifyAction.stats.negative), "problems"));
+        console.log(c.bold.gray(VerifyAction.stats.negative > 0 ? c.symbols.cross : c.symbols.check, message, c.bold.green(VerifyAction.files.length), "files checked", c.bold.red(VerifyAction.stats.negative), "problems"));
         process.exit(VerifyAction.stats.negative === 0 ? 0 : 1);
     }
     isValid() {
