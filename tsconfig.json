@@ -13,9 +13,7 @@
         "sourceMap": true,
         "lib": ["es6", "es2017"]
     },
-    "include": [
-        "src/**/*.ts"
-    ],
+    "include": ["src/**/*.ts"],
     "exclude": [
         "node_modules"
     ]
