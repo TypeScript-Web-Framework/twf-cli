@@ -58,17 +58,18 @@ export class VerifyAction {
         for (let file of VerifyAction.files) {
             let filePath: string = VerifyAction.directory + path.sep + file.name;
             if (!VerifyAction.exists(filePath)) VerifyAction.stats.negative++;
-            else {
-                if (
-                    (file.type === "dir" && !VerifyAction.isDir(filePath))
-                    || (file.type === "file" && !VerifyAction.isFile(filePath))
-                    || (file.type === "symbolic" && !VerifyAction.isSymbolicLink(filePath))
-                ) VerifyAction.stats.negative++;
-            }
+            else if (!VerifyAction.checkType(file.type, filePath)) VerifyAction.stats.negative++;
         }
         return VerifyAction.stats.negative === 0;
     }
-
+    static checkType (type:string, filePath:string):boolean {
+        switch (type) {
+            case "dir":return VerifyAction.isDir(filePath);
+            case "file":return VerifyAction.isFile(filePath);
+            case "symbolic":return VerifyAction.isSymbolicLink(filePath);
+            default : return false;
+        }
+    }
 
     static isDir (path :string):boolean {
         return fs.lstatSync(path).isDirectory()
