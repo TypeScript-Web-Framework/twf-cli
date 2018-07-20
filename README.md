@@ -8,6 +8,9 @@ TypeScript Web Framework CLI
 
 
 ## Features
+* [x] Create project
+    * [x] Current Directory
+    * [x] Own Directory
 * [x] Generate API Controller
     * [x] Default CRUD
         * [x] @HttpPost `create()`
@@ -42,9 +45,7 @@ TypeScript Web Framework CLI
 * [ ] Generate http property on controller
 * [ ] Remove http property on controller
 * [x] Test Project(Unit Testing)
-* [ ] Build Project
-    * [ ] Production Mode
-    * [x] Development Mode
+* [x] Build Project
 * [x] Generate compiled binary package
     * [x] Windows
     * [x] Linux
@@ -54,9 +55,19 @@ TypeScript Web Framework CLI
 
 
 ### Start Project
+
+To start a new project on current directory you don't need set project name
+> **!IMPORTANT**
+>
+> twf-cli does not interpret `.` or `..`.
+
 ```bash
-# twf start [project]
-twf start my-first-project
+twf start
+```
+
+To start a new project on with a own directory you need set project name
+```bash
+twf start MyProject
 ```
 
 ### Clean Project

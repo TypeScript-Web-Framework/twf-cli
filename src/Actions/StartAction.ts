@@ -1,14 +1,17 @@
 import {Helpers} from "../Helpers";
 import {spawnSync, SpawnSyncReturns} from "child_process";
+import {InstallAction} from "./InstallAction";
+import {InfoAction} from "./InfoAction";
 
 let path = require("path");
 let fs = require("fs");
-let https = require("https");
 let crypto = require('crypto');
 let uuid = require('uuid/v4');
+let c :any = require('ansi-colors');
 
 
 export class StartAction {
+    readonly REGEX_DIRECTORY : RegExp = /^([.\/\\\s]+)$/;
     public static directory : string;
     public static argv : string [] = [];
 
@@ -20,73 +23,75 @@ export class StartAction {
 
     public onInit (...args:string[]) {
         StartAction.directory = process.cwd();
-
-        if (args.length > 0) {
-            if(typeof args[0] === "string") {
-                if (!/^([.\/\\\s]+)$/.test(args[0])) StartAction.directory += path.sep + Helpers.camelize(args[0]);
-            }
-            else throw new TypeError("expected string name");
+        // check if project name is set
+        // if the project name is not set, so assumes need take the current working directory as root
+        if (args.length > 0 && typeof args[0] === "string") {
+            if (!this.REGEX_DIRECTORY.test(args[0])) StartAction.directory += path.sep + Helpers.camelize(args[0]);
         }
-        console.log(`Working on ${StartAction.directory}`);
-
-
-
-        if (!fs.existsSync(StartAction.directory)) {
-            this.isEmptyDir(StartAction.directory)
-                .then(() => StartAction.getLastRelease()
-                        .then((t) =>
-                            this.clone(t)
-                                .then(() =>
-                                    this.editConfig()
-                                        .then(() => this.installDependencies()
-                                            .then(() => {})
-                                            .catch(() => {
-
-                                            }))
-                                        .catch(() => {
-                                        })
-                                )
-                                .catch())
-                        .catch(() => {})
-                )
-                .catch((e) => {
-                    throw new Error(`The directory ${StartAction.directory} is not empty`)
-                })
+        else {
+            console.warn([
+                c.bold.yellow(c.symbols.warning),
+                c.bold.yellow("The root of the project has not been set. The current folder will be taken.")
+            ].join(" "))
         }
-        else throw new Error(`Directory ${StartAction.directory} already exists`);
+        console.log([
+            c.bold.green(c.symbols.check, "Working on "),
+            c.bold.magenta(StartAction.directory)
+        ].join(" "));
+
+        Helpers.fileExists(StartAction.directory)
+            .then(exists => {
+                // check last release version
+                let promises = [InfoAction.getLatestReleaseFromGitHub("olaferlandsen", "ts-web-framework")];
+                // check if folder is empty
+                if (exists) promises.push(this.isEmptyDir(StartAction.directory));
+                // await promises
+                Promise.all(promises)
+                    .then((itm:any[]) => {
+                        if (itm.length === 1 || (itm.length === 2 && itm[1] === true)) {
+                            this.download(itm[0].tag_name)
+                            // end
+                                .then(() => {
+                                    console.log([
+                                        c.bold.green(c.symbols.check, "Project creation finished and store on"),
+                                        c.bold.magenta(StartAction.directory)
+                                    ].join(" "));
+                                    process.exit(0);
+                                })
+                                // end with problems
+                                .catch((e) => StartAction.error(e))
+                        }
+                        if (itm.length === 2 && itm[1] === false) {
+                            console.error(c.bold.red(c.symbols.cross, "Working directory is not empty"));
+                            process.exit(1);
+                        }
+                    })
+                    .catch(e => StartAction.error(e));
+            })
+            .catch(e => StartAction.error(e));
     }
 
-    public static getLastRelease ():Promise<string> {
-        return new Promise<string>((resolve, reject) => {
-            https.get({
-                protocol : "https:",
-                host : "api.github.com",
-                hostname : "api.github.com",
-                port : "443",
-                method : "GET",
-                path : "/repos/olaferlandsen/ts-web-framework/releases/latest",
-                headers : {
-                    "user-agent" : "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0"
-                }
-            }, (res:any) => {
-                let data :any = '';
-                res.on("data", (chunk:any) => data += chunk);
-                res.on("end", () => {
-                    try {
-                        resolve(JSON.parse(data).tag_name);
-                    }
-                    catch (e) {
-                        reject(e)
-                    }
-                });
-                res.on("error", (e:any) => reject(e));
-            })
-        });
+    private static error (e:any):void {
+        console.log(c.bold.red("There's been a problem:"), e);
+        process.exit(1);
+    }
+
+    public download (version:string):Promise<void> {
+        return new Promise((resolve, reject) => {
+            Promise
+                .all([
+                    this.clone(version),
+                    this.editConfig(),
+                    InstallAction.install(StartAction.directory)
+                ])
+                .then(() => resolve())
+                .catch(e => reject(e))
+        })
     }
 
     public clone (tag:string):Promise<void> {
         return new Promise((resolve, reject) => {
-            console.log(`Cloning version ${tag}`);
+            console.log(c.bold.green(c.symbols.check, "download", tag));
             let spawn : SpawnSyncReturns<string> = spawnSync("git", [
                 "clone",
                 "https://github.com/olaferlandsen/ts-web-framework.git",
@@ -97,73 +102,31 @@ export class StartAction {
                 "1",
                 StartAction.directory
             ]);
-            if (!spawn.error) resolve();
+            if (!spawn.error) {
+                console.log(c.bold.green(c.symbols.check, "downloaded", tag));
+                resolve();
+            }
             else reject(spawn.error);
         })
     }
 
     public editConfig ():Promise<void> {
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<void>((resolve) => {
             let paths : any = {
                 manifiest : StartAction.directory + path.sep + "src" + path.sep + "manifiest.json",
                 package : StartAction.directory + path.sep + "package.json"
             };
             let content : any;
-
-            console.group("Config");
-            console.log("editing manifiest.json");
             content = JSON.parse(fs.readFileSync(paths.manifiest));
-            content.salt = crypto.createHash('sha1').update(uuid()).digest("hex");
+            content.salt = crypto.createHash('sha1')
+                .update(uuid())
+                .digest("hex");
             content = JSON.stringify(content, null, 4);
             fs.writeFile(paths.manifiest, content, (e:any) => {
                 if (e) throw new Error(e);
+                else resolve();
             });
-
-            /*
-            console.log("editing package.json");
-            content = JSON.parse(fs.readFileSync(paths.package));
-            delete content.scripts["snyk-protect"];
-            delete content.scripts["prepare"];
-            delete content.snyk;
-            delete content.dependencies.snyk;
-            content = JSON.stringify(content, null, 4) + "\n";
-            fs.writeFile(paths.package, content, (e:any) => {
-                if (e) throw new Error(e);
-                else {
-                    console.log("end...... editing package.sjon")
-                }
-            });
-            */
-            console.log("end editing...");
-            console.groupEnd();
-            resolve();
-
         })
-    }
-
-    public installDependencies ():Promise<void> {
-        return new Promise((resolve, reject) => {
-            /*
-
-            console.group("Installing dependencies");
-            process.chdir( StartAction.directory );
-            console.log("Working on", process.cwd());
-
-
-
-            let cmd : SpawnSyncReturns<string> = spawnSync(/^win/i.test(process.platform)? "npm.cmd" : "npm", ["install"]);
-            console.log("stderr", cmd["stderr"].toString());
-            console.log("stdout", cmd["stdout"].toString());
-            console.log("status", cmd["status"].toString());
-            console.groupEnd();
-
-
-            if (!cmd.error) resolve();
-            else reject(cmd.error);
-            */
-            console.log("please install dependencies:\nnpm install")
-            resolve();
-        });
     }
 
     private isEmptyDir (directory : string):Promise<boolean> {

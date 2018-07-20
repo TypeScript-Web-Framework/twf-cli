@@ -1,7 +1,7 @@
 import {Observable} from "rxjs/internal/Observable";
 import {interval} from "rxjs/internal/observable/interval";
 import Timer = NodeJS.Timer;
-
+let fs = require("fs");
 export class Helpers {
     static camelize(value:string):string {
         return value
@@ -16,7 +16,7 @@ export class Helpers {
             .replace(/\/+/g,'/');
     }
 
-    static loading (speed: number = 250):any {
+    static loading (speed: number = 250):{ start : () => {end : () => void }} {
 
         let interval : Timer = null;
         let P : string[] = ["\\", "|", "/", "-"];
@@ -30,12 +30,18 @@ export class Helpers {
                 }, speed);
                 return {
                     end : () => {
-                        clearInterval(interval)
+                        clearInterval(interval);
                         process.stdout.write("\r" + "");
                     }
                 }
             }
         }
 
+    }
+
+    static async fileExists (filePath: string):Promise<boolean> {
+        return new Promise<boolean>(resolve => {
+            fs.exists(filePath, (exists:boolean)=> resolve(exists));
+        })
     }
 }
