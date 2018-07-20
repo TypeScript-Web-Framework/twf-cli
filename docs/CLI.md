@@ -10,7 +10,7 @@ This command create a new project on a new folder with `camelized` project name.
 ## Create a new controller
 This command create a new empty controller.
 
-`twf add controller [controller name]`
+`twf add controller [name] [default route]`
 
 ## Create a new CRUD controller
 This command create a new controller with CRUD properties like `create`, `read`, `update` and `delete`
@@ -40,10 +40,9 @@ This command create a single binary file for Windows, Linux or OSX.
 `twf package`
 
 ## Serve project
-By default, the port is `80`.
 
-`twf serve [port]`
+`twf serve`
 
-## Version
+## Get Information & Version
 
-`twf version`
+`twf info`
