@@ -1,6 +1,6 @@
 {
     "name": "twf-cli",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "description": "TypeScript Web Framework CLI",
     "main": "dist/index.js",
     "bin": {
@@ -25,6 +25,7 @@
         "dist/Actions/TestAction.js",
         "dist/Actions/VerifyAction.js",
         "dist/Helpers.js",
+        "dist/Action.js",
         "dist/index.js",
         "docs",
         "docs/CLI.md",
