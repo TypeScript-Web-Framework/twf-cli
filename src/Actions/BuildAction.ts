@@ -3,23 +3,19 @@ let path = require("path");
 let c = require("ansi-colors");
 let fs = require("fs");
 export class BuildAction {
-    public static npm:string;
-    public static directory:string;
-    public static isWin:boolean;
+    public static npm:string = /^win/i.test(process.platform) ? "npm.cmd" : "npm";
+    public static directory:string = process.cwd();
 
     constructor () {
-        BuildAction.directory = process.cwd();
-        BuildAction.isWin = /^win/i.test(process.platform);
-        BuildAction.npm  = BuildAction.isWin ? "npm.cmd" : "npm";
-        this.build()
+        BuildAction.build()
             .then(c => process.exit(c))
-            .catch((c) => process.exit(c))
+            .catch(c => process.exit(c))
     }
 
-    build ():Promise<number> {
+    static build (root?:string):Promise<number> {
+        if(typeof root == "string") process.chdir(root);
         return new Promise((resolve) => {
             console.log(c.bold.green(c.symbols.check, "compiling project"));
-
             let cmd : ChildProcess = spawn(BuildAction.npm, ["run", "build"]);
             cmd.stdout.on('data', d => {
                 //console.log(d)
