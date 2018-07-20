@@ -1,3 +1,8 @@
+[![npm version](https://badge.fury.io/js/twf-cli.svg)](https://badge.fury.io/js/ts-web-framework)
+[![dependencies Status](https://david-dm.org/olaferlandsen/twf-cli/status.svg)](https://david-dm.org/olaferlandsen/twf-cli)
+[![Known Vulnerabilities](https://snyk.io/test/github/olaferlandsen/twf-cli/badge.svg?targetFile=package.json)](https://snyk.io/test/github/olaferlandsen/twf-cli?targetFile=package.json)
+[![Maintainability](https://api.codeclimate.com/v1/badges/57e794f686735825e6d6/maintainability)](https://codeclimate.com/github/olaferlandsen/twf-cli/maintainability)
+
 # twf-CLI
 TypeScript Web Framework CLI
 
