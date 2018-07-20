@@ -1,9 +1,10 @@
-[![dependencies Status](https://david-dm.org/olaferlandsen/twf-cli/status.svg)](https://david-dm.org/olaferlandsen/twf-cli)
-[![Known Vulnerabilities](https://snyk.io/test/github/olaferlandsen/twf-cli/badge.svg?targetFile=package.json)](https://snyk.io/test/github/olaferlandsen/twf-cli?targetFile=package.json)
-[![Maintainability](https://api.codeclimate.com/v1/badges/57e794f686735825e6d6/maintainability)](https://codeclimate.com/github/olaferlandsen/twf-cli/maintainability)
+[![dependencies Status](https://david-dm.org/typescript-web-framework/twf-cli/status.svg)](https://david-dm.org/typescript-web-framework/twf-cli)
+[![Known Vulnerabilities](https://snyk.io/test/github/TypeScript-Web-Framework/twf-cli/badge.svg?targetFile=package.json)](https://snyk.io/test/github/TypeScript-Web-Framework/twf-cli?targetFile=package.json)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c0cd1d278bfb43dea2d9/maintainability)](https://codeclimate.com/github/TypeScript-Web-Framework/twf-cli/maintainability)
 [![Documentation Status](https://readthedocs.org/projects/twf-cli/badge/?version=latest)](https://twf-cli.readthedocs.io/en/latest/?badge=latest)
-[![Build Status](https://travis-ci.org/olaferlandsen/twf-cli.svg?branch=master)](https://travis-ci.org/olaferlandsen/twf-cli)
+[![Build Status](https://travis-ci.org/typescript-web-framework/twf-cli.svg?branch=master)](https://travis-ci.org/typescript-web-framework/twf-cli)
 [![npm version](https://badge.fury.io/js/twf-cli.svg)](https://badge.fury.io/js/twf-cli)
+
 
 # TypeScript Web Framework Command Line Interface
 TypeScript Web Framework CLI

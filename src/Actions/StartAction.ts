@@ -42,7 +42,7 @@ export class StartAction {
         Helpers.fileExists(StartAction.directory)
             .then(exists => {
                 // check last release version
-                let promises = [InfoAction.getLatestReleaseFromGitHub("olaferlandsen", "ts-web-framework")];
+                let promises = [InfoAction.getLatestReleaseFromGitHub("typescript-web-framework", "ts-web-framework")];
                 // check if folder is empty
                 if (exists) promises.push(this.isEmptyDir(StartAction.directory));
                 // await promises
@@ -94,7 +94,7 @@ export class StartAction {
             console.log(c.bold.green(c.symbols.check, "download", tag));
             let spawn : SpawnSyncReturns<string> = spawnSync("git", [
                 "clone",
-                "https://github.com/olaferlandsen/ts-web-framework.git",
+                "https://github.com/typescript-web-framework/ts-web-framework.git",
                 "--branch",
                 tag,
                 "--single-branch",

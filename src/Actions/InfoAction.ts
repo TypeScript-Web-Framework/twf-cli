@@ -16,9 +16,9 @@ export class InfoAction {
     public run () {
         Promise.all([
             InfoAction.readJsonFile([path.dirname(path.dirname(__dirname)),"package.json"].join(path.sep)), // cli version,
-            InfoAction.getLatestReleaseFromGitHub("olaferlandsen", "twf-cli"),
+            InfoAction.getLatestReleaseFromGitHub("typescript-web-framework", "twf-cli"),
             InfoAction.readJsonFile([process.cwd(), "package.json"].join(path.sep)), // project version
-            InfoAction.getLatestReleaseFromGitHub("olaferlandsen", "ts-web-framework"),
+            InfoAction.getLatestReleaseFromGitHub("typescript-web-framework", "ts-web-framework"),
             InfoAction.npmVersion()
         ])
             .then((itm:any[]) => {
