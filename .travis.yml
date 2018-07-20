@@ -14,7 +14,7 @@ script:
     - gulp
     - mkdir tmp
     - cd tmp
-    - node ../dist/index.js start tmp/example
+    - node ../dist/index.js start example
     - cd example
     - node ../../dist/index.js verify
     - node ../../dist/index.js add controller example /default/:id/name
