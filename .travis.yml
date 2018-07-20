@@ -11,6 +11,7 @@ install:
     - npm install -g gulp-cli
     - npm install
 script:
+    - gulp
     - mkdir tmp
     - cd tmp
     - node ../dist/index.js start tmp/example
