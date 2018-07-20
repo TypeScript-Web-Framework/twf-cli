@@ -1,0 +1,20 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=05708a4657a1987d2e196e26bd3ae5c70dba392350d64a3c331be98b37385fd6
+
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+    - "8"
+install:
+    - npm install -g gulp-cli
+    - npm install
+script:
+    - mkdir tmp
+    - cd tmp
+    - node ../dist/index.js start tmp/example
+    - cd example
+    - node ../../dist/index.js verify
+    - node ../../dist/index.js add controller example /default/:id/name
+    - node ../../dist/index.js --version
