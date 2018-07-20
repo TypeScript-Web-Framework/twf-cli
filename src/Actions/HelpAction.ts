@@ -3,7 +3,7 @@ let path = require("path");
 let c = require("ansi-colors");
 export class HelpAction {
     constructor () {
-        let content : string = fs.readFileSync(path.dirname(path.dirname(__dirname))+ path.sep + "docs" + path.sep + "CLI.md" ).toString();
+        let content : string = fs.readFileSync(path.dirname(path.dirname(__dirname))+ path.sep + "docs" + path.sep + "README.md" ).toString();
         content = content.replace(
             /^(#{1,}\s+?([^\n]+))$/igm,
             c.bold.black.underline("$2")
