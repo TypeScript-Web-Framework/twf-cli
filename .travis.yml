@@ -15,7 +15,7 @@ script:
     - mkdir tmp
     - cd tmp
     - node ../dist/index.js start example
-    - cd example
+    - cd Example
     - node ../../dist/index.js verify
     - node ../../dist/index.js add controller example /default/:id/name
     - node ../../dist/index.js --version
