@@ -47,7 +47,7 @@
         "@types/node": "^11.9.0",
         "gulp": "^4.0.0",
         "gulp-clean": "^0.4.0",
-        "gulp-typescript": "^5.0.0",
+        "gulp-typescript": "^5.0.1",
         "marked-man": "^0.2.1",
         "typescript": "^2.9.2"
     },
