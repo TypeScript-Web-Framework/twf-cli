@@ -44,7 +44,7 @@
     },
     "homepage": "https://github.com/typescript-web-framework/twf-cli#readme",
     "devDependencies": {
-        "@types/node": "^11.9.0",
+        "@types/node": "^12.0.7",
         "gulp": "^4.0.0",
         "gulp-clean": "^0.4.0",
         "gulp-typescript": "^5.0.0",
