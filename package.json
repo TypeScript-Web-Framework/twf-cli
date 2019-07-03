@@ -52,7 +52,7 @@
         "typescript": "^2.9.2"
     },
     "dependencies": {
-        "ansi-colors": "^3.0.0",
+        "ansi-colors": "^4.1.1",
         "compare-versions": "^3.3.0",
         "mkdirp": "^0.5.1",
         "rxjs": "^6.2.0",
