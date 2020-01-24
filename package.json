@@ -54,7 +54,7 @@
     "dependencies": {
         "ansi-colors": "^3.0.0",
         "compare-versions": "^3.3.0",
-        "mkdirp": "^0.5.1",
+        "mkdirp": "^1.0.1",
         "rxjs": "^6.2.0",
         "uuid": "^3.3.2"
     },
