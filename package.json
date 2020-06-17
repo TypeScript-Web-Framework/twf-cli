@@ -1,78 +1,83 @@
 {
-    "name": "twf-cli",
-    "version": "1.7.2",
-    "description": "TypeScript Web Framework CLI",
-    "main": "dist/index.js",
-    "bin": {
-        "twf": "bin/twf.js"
-    },
-    "files": [
-        "bin",
-        "bin/twf.js",
-        "dist",
-        "dist/Actions",
-        "dist/Actions/AddAction.js",
-        "dist/Actions/BuildAction.js",
-        "dist/Actions/CleanAction.js",
-        "dist/Actions/HelpAction.js",
-        "dist/Actions/InfoAction.js",
-        "dist/Actions/InstallAction.js",
-        "dist/Actions/PackageAction.js",
-        "dist/Actions/RestartAction.js",
-        "dist/Actions/RmAction.js",
-        "dist/Actions/ServeAction.js",
-        "dist/Actions/StartAction.js",
-        "dist/Actions/TestAction.js",
-        "dist/Actions/VerifyAction.js",
-        "dist/Helpers.js",
-        "dist/Action.js",
-        "dist/index.js",
-        "docs",
-        "docs/CLI.md",
-        "README.md"
-    ],
-    "preferGlobal": true,
-    "scripts": {},
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/typescript-web-framework/twf-cli.git"
-    },
-    "author": "Olaf Erlandsen",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/typescript-web-framework/twf-cli/issues"
-    },
-    "homepage": "https://github.com/typescript-web-framework/twf-cli#readme",
-    "devDependencies": {
-        "@types/node": "^11.9.0",
-        "gulp": "^4.0.0",
-        "gulp-clean": "^0.4.0",
-        "gulp-typescript": "^5.0.0",
-        "marked-man": "^0.2.1",
-        "typescript": "^2.9.2"
-    },
-    "dependencies": {
-        "ansi-colors": "^3.0.0",
-        "compare-versions": "^3.3.0",
-        "mkdirp": "^0.5.1",
-        "rxjs": "^6.2.0",
-        "uuid": "^3.3.2"
-    },
-    "keywords": [
-        "web",
-        "api",
-        "webapp",
-        "http",
-        "https",
-        "server",
-        "rest",
-        "reastapi",
-        "endpoint",
-        "cli",
-        "express",
-        "hmvc",
-        "mvc",
-        "ts",
-        "typescript"
-    ]
+  "name": "twf-cli",
+  "version": "1.7.2",
+  "description": "TypeScript Web Framework CLI",
+  "main": "dist/index.js",
+  "bin": {
+    "twf": "bin/twf.js"
+  },
+  "files": [
+    "bin",
+    "bin/twf.js",
+    "dist",
+    "dist/Actions",
+    "dist/Actions/AddAction.js",
+    "dist/Actions/BuildAction.js",
+    "dist/Actions/CleanAction.js",
+    "dist/Actions/HelpAction.js",
+    "dist/Actions/InfoAction.js",
+    "dist/Actions/InstallAction.js",
+    "dist/Actions/PackageAction.js",
+    "dist/Actions/RestartAction.js",
+    "dist/Actions/RmAction.js",
+    "dist/Actions/ServeAction.js",
+    "dist/Actions/StartAction.js",
+    "dist/Actions/TestAction.js",
+    "dist/Actions/VerifyAction.js",
+    "dist/Helpers.js",
+    "dist/Action.js",
+    "dist/index.js",
+    "docs",
+    "docs/CLI.md",
+    "README.md"
+  ],
+  "preferGlobal": true,
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/typescript-web-framework/twf-cli.git"
+  },
+  "author": "Olaf Erlandsen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/typescript-web-framework/twf-cli/issues"
+  },
+  "homepage": "https://github.com/typescript-web-framework/twf-cli#readme",
+  "devDependencies": {
+    "@types/node": "^11.9.0",
+    "gulp": "^4.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-typescript": "^5.0.0",
+    "marked-man": "^0.4.0",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "ansi-colors": "^3.0.0",
+    "compare-versions": "^3.3.0",
+    "mkdirp": "^0.5.2",
+    "rxjs": "^6.2.0",
+    "uuid": "^3.3.2",
+    "snyk": "^1.342.2"
+  },
+  "keywords": [
+    "web",
+    "api",
+    "webapp",
+    "http",
+    "https",
+    "server",
+    "rest",
+    "reastapi",
+    "endpoint",
+    "cli",
+    "express",
+    "hmvc",
+    "mvc",
+    "ts",
+    "typescript"
+  ],
+  "snyk": true
 }
